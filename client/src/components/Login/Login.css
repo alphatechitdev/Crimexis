@@ -1,0 +1,55 @@
+
+
+
+.login-page{
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+
+.form-container{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    background-color: steelblue;
+    color: black;
+    border-radius: 10px;
+    gap: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+form input {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+
+}
+
+form button {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+
+
+}
+
+form button:hover {
+    background-color: white;
+    color: black;
+}

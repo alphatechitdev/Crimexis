@@ -1,0 +1,36 @@
+
+
+
+.intro-page{
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+.hero {
+    background-color: aliceblue;
+    color: black;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.CTA {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.CTA button {
+    padding: 20px;
+    background-color:white;
+    color: black;
+    
+}

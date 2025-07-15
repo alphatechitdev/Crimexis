@@ -1,0 +1,13 @@
+
+
+
+.addCrime-page{
+    background-color: black;
+    height: 200vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+}
