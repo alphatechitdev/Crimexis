@@ -1,0 +1,21 @@
+
+
+.hotspots-page{
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+.hotspots-location{
+    background-color: skyblue;
+    color: black;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 5px;
+}
+
+.locations{
+    background-color: white;
+    color: black;
+}

@@ -1,5 +1,6 @@
 import express from 'express';
 import AuthController from '../controllers/auth.controller.ts';
+import { generateToken } from '../middleware/tokenWork.ts';
 const AuthEndpoint = express.Router();
 
 
@@ -12,6 +13,12 @@ AuthEndpoint.post('/login', async (req, res) => {
         if(!result.success) {
             res.status(401).json(result);
         } else {
+            const token = generateToken({userId:creds.userId});
+            res.cookie('CrimexisSessionToken', token, {
+                sameSite:true,
+                secure:false,
+                maxAge:360000
+            })
             res.status(200).json(result);
         }
     } catch (error) {

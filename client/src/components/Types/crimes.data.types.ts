@@ -13,14 +13,14 @@ export interface CrimeDataTypes {
         lat:number,
         lng:number
     }
-    crimeTime:string;
+    crimeTime:Date;
     involvedPeople:{
         name:string,
         age:number,
         profession:string
     }[],
     reportedBy:string;
-    severityLevel: 'low' | 'medium' | 'high';
+    severityLevel: string
 }
 
 

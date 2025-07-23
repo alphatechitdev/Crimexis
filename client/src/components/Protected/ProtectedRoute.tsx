@@ -1,13 +1,13 @@
-import { useEffect } from "react";
+"use client";
+
+import { ReactNode, useEffect } from "react";
 import { useAuth } from "../Context/Auth.Context";
 import { useRouter } from "next/navigation";
+import Loading from "../Loading/Loading";
 
 
 
-
-
-
-const ProtectedRoute = () => {
+const ProtectedRoute = ({children}:{children:ReactNode}) => {
 
 
     const {isAuthenticated} = useAuth();
@@ -15,17 +15,15 @@ const ProtectedRoute = () => {
 
     useEffect(() => {
         if(isAuthenticated === false) {
-            router.push('/');
+          router.push('/Login')
         }
-    }, [isAuthenticated]);
+        console.log(isAuthenticated)
+    }, [isAuthenticated, router]);
 
-    if (isAuthenticated === null) {
-        return 
-    }
-
+    
     return (
         <div className="protected-route">
-
+            {children}
         </div>
     )
 };

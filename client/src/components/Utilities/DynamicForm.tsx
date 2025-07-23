@@ -77,7 +77,7 @@ export default function DynamicForm<T>({initialData, onChange, onSubmit}:Dynamic
 
                             if(typeof item === "object" && item !== null) {
                                 return (
-                                    <div>
+                                    <div key={uniqueKey}>
                                         {renderFields(item, itemPath)}
                                     </div>
                                 )
@@ -101,6 +101,61 @@ export default function DynamicForm<T>({initialData, onChange, onSubmit}:Dynamic
                     </div>
                 )
             }
+            if (typeof value === "string" && key === "crimeType") {
+                return (
+                     <div key={uniqueKey} className="dynamic-form-field">
+            <label>{currentPath.join("-")}</label>
+            <select
+                value={value}
+                onChange={(e) => handleChange(currentPath, e.target.value)}
+                className="dynamic-form-input"
+            >
+                <option value="">Select Crime Type</option>
+                <option value="Theft">Theft</option>
+                <option value="Robbery">Robbery</option>
+                <option value="Burglary">Burglary</option>
+                <option value="Assault">Assault</option>
+                <option value="Murder">Murder</option>
+                <option value="Kidnapping">Kidnapping</option>
+                <option value="Harassment">Harassment</option>
+                <option value="Domestic Violence">Domestic Violence</option>
+                <option value="Drug Possession">Drug Possession</option>
+                <option value="Weapon Possession">Weapon Possession</option>
+                <option value="Traffic Violation">Traffic Violation</option>
+                <option value="Vandalism">Vandalism</option>
+                <option value="Fraud">Fraud</option>
+                <option value="Cybercrime">Cybercrime</option>
+                <option value="Rape">Rape</option>
+                <option value="Terrorism">Terrorism</option>
+            </select>
+        </div>
+                )
+            }
+            if (key === "crimeTime") {
+                return (
+                    <div key={uniqueKey} className="dynamic-form-fied">
+                        <label>{currentPath.join("-")}</label>
+                        <input 
+                        type="datetime-local" 
+                        onChange={(e) => handleChange(currentPath, new Date(e.target.value))}
+                        className="dynamic-form-input"
+                        />
+                    </div>
+                )
+            }
+             if (typeof value === "string" && key === "severityLevel") {
+                return (
+                    <div key={uniqueKey} className="dynamic-form-fied">
+                        <label>{currentPath.join("-")}</label>
+                            <select onChange={(e) => handleChange(currentPath, e.target.value)} className="dynamic-form-input">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+
+                    </div>
+                )
+             }
              if (typeof value === "string" || typeof value === "number") {
                 return (
                     <div key={uniqueKey} className="dynamic-form-field">
@@ -114,9 +169,12 @@ export default function DynamicForm<T>({initialData, onChange, onSubmit}:Dynamic
                     </div>
                 )
              }
+            
              if (typeof value === "object" && key === "coordinates") {
                 return (
+                    <div key={uniqueKey}>
                     <CrimeMapForm onSelectLocation={handleMapSelect}/>
+                     </div>
                 )
              }
 

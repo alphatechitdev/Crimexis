@@ -1,16 +1,27 @@
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from models.kMeans import ApplyKMeans
 from dataController.crimeController import fetchCrimeData, clean_crime_data
 
 app = FastAPI()
 
-@app.post('/getHotspots')
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins = ['http://localhost:3000'],
+    allow_credentials = True,
+    allow_methods = ['*'],
+    allow_headers = ['*']
+)
+
+@app.get('/getHotspots')
 def getHotspots():
     crimeData = fetchCrimeData()
     cleanData = clean_crime_data(crimeData)
-    ApplyKMeans(cleanData)
+    coords = [[item["lat"], item["lng"]] for item in cleanData]
+    hotspots = ApplyKMeans(coords)
+    return {"hotspots": hotspots}
     
     
     

@@ -15,7 +15,7 @@ const crimesSchema = new mongoose.Schema({
         lat:Number,
         lng:Number,
     },
-    crimeTime: {type: String, required:true},
+    crimeTime: {type: Date, required:true},
     involvedPeople: [
         {
             name:String,

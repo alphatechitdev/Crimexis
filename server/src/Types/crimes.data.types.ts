@@ -12,7 +12,7 @@ export interface CrimeDataTypes {
         lat:number,
         lng:number
     };
-    crimeTime:string;
+    crimeTime:Date;
     involvedPeople:{
         name:string,
         age:number,

@@ -9,7 +9,7 @@ export async function GET(req : Request) {
     }
 
     try {
-        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`, {
+        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&accept-language=en`, {
             headers:{
                 'User-Agent' : 'CrimexisApp/1.0 (admin@crimex.com)'
             }
@@ -20,7 +20,6 @@ export async function GET(req : Request) {
         }
 
         const data = await response.json();
-        console.log(data);
         const location = data.display_name;
         return new Response(JSON.stringify({location}), {
             status:200,

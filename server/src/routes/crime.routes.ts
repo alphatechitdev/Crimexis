@@ -1,4 +1,3 @@
-
 import express from 'express';
 import CrimeController from '../controllers/crime.controller.ts';
 const CrimeEndpoint = express.Router();
@@ -25,9 +24,25 @@ CrimeEndpoint.get('/exportCrimeData', async (req , res) => {
     try {
 
     } catch (error) {
-        
+
     }
 })
+
+CrimeEndpoint.get('/fetchCrimeData', async (req , res) => {
+    try {
+        const CC = new CrimeController();
+        const result = await CC.fetchCrimeData();
+        if(!result.success) {
+            res.status(404).json(result);
+        } else {
+            res.status(200).json(result);          
+        }
+    } catch (error) {
+        console.error("Error While Fetching Crime Data, ", error);
+        res.status(200).json({message:"Internal Server Error"});          
+
+    }
+});
 
 
 export default CrimeEndpoint;

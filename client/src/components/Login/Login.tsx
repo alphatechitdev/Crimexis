@@ -21,7 +21,9 @@ const Login = () => {
     const Login  = async (creds:LoginCredsTypes) => {
         try {
             setIsLoading(true);
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`, {creds});
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`, {creds}, {
+                withCredentials:true
+            });
             if(response.data.success) {
                 setMessage("Login Successful!")
                 router.push('/Dashboard');

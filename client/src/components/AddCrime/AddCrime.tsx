@@ -30,7 +30,7 @@ const AddCrime = () => {
             }
         ],
         reportedBy:"",
-        severityLevel:"low"
+        severityLevel:""
 
     })
 

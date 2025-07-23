@@ -7,4 +7,24 @@ header{
     justify-content: center;
     align-items: center;
     text-align: center;
+    gap: 2rem;
+}
+
+ul .active-link{
+    background-color: white;
+    color: black;
+}
+
+ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
+}
+li{
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 8px;
 }

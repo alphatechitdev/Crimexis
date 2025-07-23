@@ -16,7 +16,7 @@ class CrimeController {
         }
     }
 
-    async fetchCrimeData() {
+    async fetchLessCrimeData() {
         try {
             const crimeData = await Crime.find({}, {
                 crimeType:1,
@@ -28,6 +28,16 @@ class CrimeController {
             return {crimeData:crimeData};
         } catch (error) {
             console.error("Error While Fetching The Crime Data")
+        }
+    };
+
+    async fetchCrimeData() {
+        try {
+            const crimeData = await Crime.find({});
+            return {success:true, crimeData:crimeData};
+        } catch (error) {
+            console.error("Error While Fetching Crime Data, ", error);
+            return {success:false, crimeData:null}
         }
     }
 };

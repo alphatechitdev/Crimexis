@@ -1,4 +1,6 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react"
+"use client";
+
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { AuthContextTypes } from "../Types/auth.context.types";
 import axios from 'axios';
 
@@ -11,11 +13,20 @@ const AuthProvider  = ({children}:{children:ReactNode}) => {
     useEffect(() => {
         const checkAuthentication = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/protected/protected-route`)
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/protected/protected-route`, {
+                    withCredentials:true
+                });
+                if (!response.data.success) {
+                    setIsAuthenticated(false);
+                } else {
+                    setIsAuthenticated(true);
+                }
             } catch (error) {
-                console.error("Error While ")
+                console.error("Error While Authenticating..")
+                setIsAuthenticated(false);
             }
-        }   
+        }  
+        checkAuthentication();
     }, [])
 
 

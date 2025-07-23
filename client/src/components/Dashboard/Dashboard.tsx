@@ -1,5 +1,5 @@
 
-
+import './Dashboard.css'
 
 
 const Dashboard = () => {
@@ -10,7 +10,7 @@ const Dashboard = () => {
     return (
         <div className="dashboard-page">
             <div className="">
-                
+
             </div>
 
         </div>

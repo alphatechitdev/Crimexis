@@ -5,10 +5,13 @@ import express from 'express';
 import AuthEndpoint from './routes/auth.routes.ts';
 import connectToMongoose from './configs/db.config.ts';
 import CrimeEndpoint from './routes/crime.routes.ts';
+import ProtectedEndpoint from './routes/protected.route.ts';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(cors({
     origin:'http://localhost:3000',
@@ -21,6 +24,7 @@ await connectToMongoose();
 
 app.use('/api/auth', AuthEndpoint);
 app.use('/api/crimework', CrimeEndpoint);
+app.use('/api/protected', ProtectedEndpoint);
 
 
 
