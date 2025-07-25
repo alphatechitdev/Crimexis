@@ -2,9 +2,9 @@
 from configs.dbconfig import db
 
 
-def fetchCrimeData():
+def fetchCrimeData(crimeType):
     crime_collection = db["crimes"]
-    crime_data = list(crime_collection.find({}))
+    crime_data = list(crime_collection.find({"crimeType":crimeType}))
     return crime_data
     
 
@@ -25,3 +25,4 @@ def clean_crime_data(raw_data):
             continue
         
     return cleaned
+

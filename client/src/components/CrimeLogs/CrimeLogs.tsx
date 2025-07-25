@@ -49,7 +49,7 @@ const CrimeLogs = () => {
                                     </div>
                                 ))}</td>
                                 <td>{crime.crimeLocation}</td>
-                                <td>{crime.coordinates.map}</td>
+                                <td>{(crime.coordinates.lat)} {(crime.coordinates.lng)}</td>
                                 <td></td>
                             </tr>
                         ))}

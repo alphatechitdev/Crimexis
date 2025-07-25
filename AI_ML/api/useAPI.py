@@ -1,9 +1,12 @@
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
+from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
 
 from models.kMeans import ApplyKMeans
+from trainer.RForestTrainer import TrainRandomForest
 from dataController.crimeController import fetchCrimeData, clean_crime_data
+import joblib
 
 app = FastAPI()
 
@@ -16,8 +19,8 @@ app.add_middleware(
 )
 
 @app.get('/getHotspots')
-def getHotspots():
-    crimeData = fetchCrimeData()
+def getHotspots(crimeType: Optional[str] = Query(default=None)):
+    crimeData = fetchCrimeData(crimeType)
     cleanData = clean_crime_data(crimeData)
     coords = [[item["lat"], item["lng"]] for item in cleanData]
     hotspots = ApplyKMeans(coords)
@@ -25,4 +28,12 @@ def getHotspots():
     
     
     
+@app.get('/TrainRForest')
+def trainRForest(): 
+    crimeData = fetchCrimeData()
+    TrainRandomForest(crimeData)
     
+    
+@app.get('/getSeverity')
+def getSeverity():
+    model = joblib.load()
