@@ -31,9 +31,14 @@ class CrimeController {
         }
     };
 
-    async fetchCrimeData() {
+    async fetchCrimeData(crimeType:string | null) {
         try {
-            const crimeData = await Crime.find({});
+            let crimeData = null;
+            if (crimeType == null) {
+                crimeData = await Crime.find({});
+            } else {
+                crimeData = await Crime.find({crimeType});
+            }
             return {success:true, crimeData:crimeData};
         } catch (error) {
             console.error("Error While Fetching Crime Data, ", error);

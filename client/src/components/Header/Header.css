@@ -1,7 +1,4 @@
-
-
-
-header{
+header {
     background-color: black;
     padding: 20px;
     justify-content: center;
@@ -10,21 +7,43 @@ header{
     gap: 2rem;
 }
 
-ul .active-link{
+ul {
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+li {
+    padding: 10px 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+ul .active-link {
     background-color: white;
     color: black;
 }
 
-ul{
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    gap: 5rem;
-    justify-content: center;
-    align-items: center;
-}
-li{
-    padding: 10px;
-    font-weight: bold;
-    border-radius: 8px;
+@media screen and (max-width: 768px) {
+    header {
+        padding: 15px;
+    }
+
+    ul {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    li {
+        width: 100%;
+        text-align: center;
+    }
 }

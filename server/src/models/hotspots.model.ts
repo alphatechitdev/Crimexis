@@ -6,7 +6,7 @@ const hotspotsSchema = new mongoose.Schema({
     hotspots: [ 
         {
             locationName:String,
-            coordinates:{lat:String, lng:String}
+            coordinates:{lat:Number, lng:Number}
         } 
     ],
 
@@ -16,4 +16,4 @@ const hotspotsSchema = new mongoose.Schema({
 
 const Hotspots = mongoose.model('hotspots', hotspotsSchema);
 
-export default hotspotsSchema;
+export default Hotspots;

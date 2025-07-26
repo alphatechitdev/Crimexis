@@ -1,0 +1,59 @@
+.crime-logs-page {
+    background-color: black;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.crime-type-input {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    width: 50%;
+    border: 1px solid white;
+    border-radius: 6px;
+}
+
+.crime-table-container {
+    background-color: whitesmoke;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    width: 80%;
+    overflow-x: auto; /* horizontal scroll if table is too wide */
+}
+
+table {
+    background-color: orange;
+    color: black;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; 
+}
+
+table th,
+table td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid black;
+}
+
+@media screen and (max-width: 768px) {
+    .crime-type-input {
+        width: 90%;
+    }
+
+    .crime-table-container {
+        width: 100%;
+        padding: 8px;
+    }
+}

@@ -2,32 +2,74 @@
 import axios from 'axios'
 import './Hotspots.css'
 import { useState } from 'react';
+import { HotspotsDataTypes } from '@/components/Types/hotspot.data.types';
 
 const Hotspots = () => {
 
     const [crimeType, setCrimeType] = useState("");
 
-    const [hotspotsLocations, setHotspotsLocations] = useState<string[]>([])
+    const [hotspotsLocations, setHotspotsLocations] = useState<string[]>([]);
+    const [hotspotMessage, setHotspotMessage] = useState("");
+
+    const [hotspotData, setHotspotData] = useState<HotspotsDataTypes>();
+    const [hotspots, setHotspots] = useState<HotspotsDataTypes["hotspots"]>([]);
 
     const getHotspots = async (crimeType:string) => {
         try {
             const hotspotsLocations = [];
             const response = await axios.get(`${process.env.NEXT_PUBLIC_ML_URL}/getHotspots?crimeType=${crimeType}`);
             const hotspots = response.data.hotspots;
-            const locations : string [] = [];
 
+            const finalHotspots : HotspotsDataTypes["hotspots"] = []
+
+            const locations : string [] = [];
             for(const center of hotspots) {
                 const locationName = await fetchLocationName(center[0], center[1]);
                 if (locationName) {
-                    console.log(locationName);
+                    const hotspot = {
+                        locationName:locationName,
+                        coordinates: {
+                            lat:center[0],
+                            lng:center[1]
+                        }
+                    }
+                    finalHotspots.push(hotspot);
                     locations.push(locationName)
                 }
+
             }
 
+            setHotspots(finalHotspots);
+
             setHotspotsLocations(locations);
+            setHotspotData((prev) => ({
+                ...prev,
+                crimeType:crimeType,
+                hotspots:finalHotspots
+            }))
+
           
         } catch (error) {
             console.error("Error While Getting Hotspots, ", error);
+        }
+    }
+
+    const updateHotspotsRecords = async () => {
+
+        try {
+            const response  = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/hotspots/updateHotspots`, {hotspotData});
+            const data = response.data;
+
+            if (!data.success) {
+                setHotspotMessage("Hotspots Auto Update Failed!")
+            } else {
+                setHotspotMessage("Hotspots Update Success!")
+
+            }
+        } catch (error) {
+            console.error("Error While Updating Hotspots, ", error);
+            setHotspotMessage("Hotspots Auto Update Failed!")
+
         }
     }
 
@@ -51,10 +93,13 @@ const Hotspots = () => {
 
     return (
         <div className="hotspots-page">
-            <div className='hotspots-location'>
+            <div className='hotspot-message-div'>
+                <strong>{hotspotMessage}</strong>
+            </div>
+            <div className='hotspots-menu'>
               <select
                 onChange={(e) => setCrimeType(e.target.value)}
-                className="dynamic-form-input"
+                className="crime-type-input"
             >
                 <option value="">Select Crime Type</option>
                 <option value="Theft">Theft</option>
@@ -75,7 +120,10 @@ const Hotspots = () => {
                 <option value="Terrorism">Terrorism</option>
             </select>
                 <button onClick={() => getHotspots(crimeType)}>Find Hotspots</button>
-                {hotspotsLocations.map((hotspot) => (
+                <button onClick={() => updateHotspotsRecords()}>Update Hotspots</button>
+                </div>
+                <div className='hotspots-location'>
+                {hotspotsLocations && hotspotsLocations.map((hotspot) => (
                     <div className='locations'>
                         <h3>{hotspot}</h3>
                     </div>

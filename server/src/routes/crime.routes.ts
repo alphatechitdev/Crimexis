@@ -30,8 +30,13 @@ CrimeEndpoint.get('/exportCrimeData', async (req , res) => {
 
 CrimeEndpoint.get('/fetchCrimeData', async (req , res) => {
     try {
+        let crimeType : null | string = null
+        
+        if (typeof req.query.crimeType === "string") {
+            crimeType  = req.query.crimeType;
+        }
         const CC = new CrimeController();
-        const result = await CC.fetchCrimeData();
+        const result = await CC.fetchCrimeData(crimeType);
         if(!result.success) {
             res.status(404).json(result);
         } else {

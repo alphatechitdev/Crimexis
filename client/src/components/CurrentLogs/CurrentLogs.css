@@ -1,0 +1,43 @@
+
+
+
+.current-logs{
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    text-align: center;
+}
+
+.hotspots {
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 10px;
+}
+
+.hotspot-box{
+    background-color: black;
+    width: 500px;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hotspot-points{
+    background-color: orange;
+    color: black;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+@media screen and (max-width:768px){
+    .hotspot-box {
+        width: 370px;
+    }
+}

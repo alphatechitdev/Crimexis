@@ -7,6 +7,7 @@ import connectToMongoose from './configs/db.config.ts';
 import CrimeEndpoint from './routes/crime.routes.ts';
 import ProtectedEndpoint from './routes/protected.route.ts';
 import cookieParser from 'cookie-parser';
+import HotspotsEndpoint from './routes/hotspots.route.ts';
 
 const app = express();
 
@@ -25,7 +26,7 @@ await connectToMongoose();
 app.use('/api/auth', AuthEndpoint);
 app.use('/api/crimework', CrimeEndpoint);
 app.use('/api/protected', ProtectedEndpoint);
-
+app.use('/api/hotspots', HotspotsEndpoint);
 
 
 
