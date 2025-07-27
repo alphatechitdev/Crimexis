@@ -1,13 +1,15 @@
 import express from 'express';
 import AuthController from '../controllers/auth.controller.ts';
 import { generateToken } from '../middleware/tokenWork.ts';
+import customLimiter from '../middleware/reqLimiter.ts';
 const AuthEndpoint = express.Router();
 
 
 
-AuthEndpoint.post('/login', async (req, res) => {
+AuthEndpoint.post('/login', customLimiter, async (req, res) => {
     try {
         const {creds} = req.body;
+        console.log("IP Address, ", req.ip);
         const AC = new AuthController();
         const result = await AC.Login(creds);
         if(!result.success) {
@@ -15,9 +17,10 @@ AuthEndpoint.post('/login', async (req, res) => {
         } else {
             const token = generateToken({userId:creds.userId});
             res.cookie('CrimexisSessionToken', token, {
-                sameSite:true,
-                secure:false,
-                maxAge:360000
+                sameSite:'none',
+                httpOnly:true,
+                secure:true,
+                maxAge: 3600000
             })
             res.status(200).json(result);
         }
