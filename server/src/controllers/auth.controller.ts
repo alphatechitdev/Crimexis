@@ -1,16 +1,16 @@
-import argon2 from 'argon2';
 import { RegisterCreds } from '../Types/register.creds.types.ts';
 import { LoginCredsTypes } from '../Types/login.creds.types.ts';
 import hashPassword, { verifyPassword } from '../utilities/hashing.ts';
 import User from '../models/user.model.ts';
-
+import { sendOTP } from '../utilities/sendOTP.ts';
+import Admins from '../models/admins.model.ts';
 
 class AuthController {
     constructor() {
 
     }
 
-    async Login(LoginCreds:LoginCredsTypes) {
+    async LoginAsUser(LoginCreds:LoginCredsTypes) {
         try {
             const foundUser = await User.findOne({userId:LoginCreds.userId});
             if(!foundUser) return {success:false, account:false};
@@ -25,21 +25,32 @@ class AuthController {
         }
     }
 
-    async Register(RegisterData:RegisterCreds) {
+    async RegisterAsAdmin(RegisterData:RegisterCreds) {
         try {
-            const hashedPassword = await hashPassword(RegisterData.password);
-            const newUser = {
-                name:RegisterData.name,
-                userId: RegisterData.name.toLowerCase().concat('012'),
-                password:hashedPassword
-            }
-            const user = await User.insertOne(newUser);
-            return {success:true, userId:user.userId};
+            const hashedPassword = await hashPassword(RegisterData.adminPassword);
+
+            RegisterData.adminPassword = hashedPassword;
+            
+            const admin = await Admins.insertOne(RegisterData);
+            return {success:true};
+
         } catch (error) {
             console.error("Error While Registering, ", error);
             return {success:false};
         }
     }
+
+    /* 
+    async makeUsername (email:string) {
+        try {
+            const
+            const name = email.split('@');
+            const username = `${name}${}`
+        } catch (error) {
+
+        }
+    } */
 };
+
 
 export default AuthController;

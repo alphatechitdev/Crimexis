@@ -11,7 +11,7 @@ export interface RegisterCreds {
     },
     adminName:string,
     adminEmail:string,
-    adminPhone:number,
+    adminPhone:string,
     adminPassword:string
 };
 

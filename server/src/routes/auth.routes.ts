@@ -31,11 +31,11 @@ AuthEndpoint.post('/login', customLimiter, async (req, res) => {
 });
 
 
-AuthEndpoint.post('/register', async (req, res) => {
+AuthEndpoint.post('/registerAdmin', async (req, res) => {
     try {
         const {creds} = req.body;
         const AC = new AuthController();
-        const result = await AC.Register(creds);
+        const result = await AC.RegisterAsAdmin(creds);
         if(result.success) {
             res.status(200).json(result);
         } else {

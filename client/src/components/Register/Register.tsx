@@ -3,7 +3,15 @@ import { useForm } from "react-hook-form"
 import { RegisterCreds } from "../Types/register.creds.types"
 import axios from "axios";
 import { useState } from "react";
+import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from "firebase/auth";
+
 import './Register.css'
+import { auth } from "../Lib/Firebase";
+
+interface Window {
+  recaptchaVerifier?: RecaptchaVerifier;
+  confirmationResult?: ConfirmationResult;
+}
 
 
 const Register = () => {
@@ -12,14 +20,58 @@ const Register = () => {
     const [otpPhase,setOTPPhase] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState("");
+    const [otp, setOtp] = useState('');
+    const [credsPhone, setCredsPhone] = useState<RegisterCreds["adminPhone"]>("");
+    const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
+
+
+    const sendOTP = async () => {
+        try {
+            if (window.recaptchaVerifier) {
+                window.recaptchaVerifier.clear();
+            }
+            window.recaptchaVerifier = new RecaptchaVerifier(auth,"recaptcha-container", {
+                size:'invisible',
+                callback : (response) => {
+                    console.log("reCAPTCHA verified")
+                }
+            });
+            alert(credsPhone);
+
+            const confirmation = await signInWithPhoneNumber(auth, credsPhone, window.recaptchaVerifier);
+            setConfirmationResult(confirmation)
+        } catch (error) {
+            console.error("Error While Sending OTP, ", error);
+        }
+    };
+
+    const verifyOTP = async () => {
+        try {
+            if (!confirmationResult) {
+                console.error("Confirmation result is null");
+                return;
+            }
+            const result = await confirmationResult.confirm(otp);
+            const user = result.user;
+            const idToken = await user.getIdToken();
+        } catch (error) {
+            setMessage("Invalid OTP!")
+        }
+    }
 
 
 
     const Register = async (creds:RegisterCreds) => {
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register`, {creds});
-            if (response.data.sucess) {
-                setOTPPhase(true);
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/registerAdmin`, {creds});
+            if (response.data.success) {
+                alert(`Register  ${creds.adminPhone}`)
+                setCredsPhone(creds.adminPhone);
+                await sendOTP()
+                setTimeout(() => {
+                    setOTPPhase(true);
+                }, 5000);
+
                 setMessage("Registration Successful");
             } else {
                 setMessage("Registration Successful");
@@ -32,7 +84,7 @@ const Register = () => {
         }
     }
     
-    cons
+   
 
 
     return(
@@ -62,8 +114,8 @@ const Register = () => {
                     <input type="email" {...register("adminEmail", {required:true})}/>
                     {errors.adminEmail && <p style={{color:'red'}}>{errors.adminEmail.message}</p>}
 
-                    <label>Admin Phone:</label>
-                    <input type="tel" {...register("adminPhone", {required:true})}/>
+                    <label>Admin Phone: (For OTP & Verification )</label>
+                    <input type="text" {...register("adminPhone", {required:true})}/>
                     {errors.adminPhone && <p style={{color:'red'}}>{errors.adminPhone.message}</p>}
 
 
@@ -74,12 +126,21 @@ const Register = () => {
                     <button type="submit">{isLoading ? "Registering": "Regsiter"}</button>
                     {message && <p>{message}</p>}
                 </form>
+                 <div id="recaptcha-container"></div>
             </div>
+
               ) : (
                 <div>
-                    <form>
+                    <form onSubmit={verifyOTP}>
                         <label>OTP:</label>
-                        <input type="text" />
+                        <input 
+                        type="text" 
+                        value={otp} 
+                        onChange={(e) => setOtp(e.target.value)}
+                        placeholder="Enter OTP"
+                        />
+                        <strong>{message}</strong>
+                        <button type="submit">Verify</button>
                     </form>
                 </div>
               )}

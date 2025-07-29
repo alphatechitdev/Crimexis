@@ -2,7 +2,17 @@
 
 
 export interface RegisterCreds {
-    name:string,
-    userId:string,
-    password:string
-}
+    departmentName:string,
+    departmentMainOffice:{
+        address: string,
+    },
+    adminOffice: {
+        address:string,
+    },
+    adminName:string,
+    adminEmail:string,
+    adminPhone:string,
+    adminPassword:string
+};
+
+
