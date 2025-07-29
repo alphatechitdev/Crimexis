@@ -13,7 +13,7 @@ const AdminSchema = new mongoose.Schema({
     adminEmail:String,
     adminPhone:String,
     adminUserId:String,
-    adminPassword:String,
+    password:String,
     adminHonestCheck:String,
     accountStatus:Boolean
 

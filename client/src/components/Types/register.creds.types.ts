@@ -13,7 +13,7 @@ export interface RegisterCreds {
     adminEmail:string,
     adminUserId:string,
     adminPhone:string,
-    adminPassword:string,
+    password:string,
     adminHonestCheck:boolean,
     accountStatus:boolean,
 };

@@ -41,11 +41,14 @@ class AuthController extends AuthRulesController{
 
     async Login(LoginCreds:LoginCredsTypes) {
         try {
+            console.log("User If", LoginCreds);
             let foundUser = null;
             if (LoginCreds.userId.includes("ADM")) {
-                foundUser = await Admins.findOne({ userId: LoginCreds.userId });
+                foundUser = await Admins.findOne({ adminUserId: LoginCreds.userId });
+                console.log("Found In")
+            } else {
+                foundUser = await User.findOne({userId:LoginCreds.userId});
             }
-            foundUser = await User.findOne({userId:LoginCreds.userId});
             if(!foundUser) return {success:false, account:false};
             if(! await verifyPassword(foundUser.password as string ,LoginCreds.password)) {
                 return {success:false, account:true}

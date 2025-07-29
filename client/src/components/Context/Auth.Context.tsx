@@ -9,6 +9,7 @@ const AuthContext = createContext<AuthContextTypes | undefined>(undefined);
 const AuthProvider  = ({children}:{children:ReactNode}) => {
 
     const [isAuthenticated, setIsAuthenticated] = useState<null | boolean>(null);
+    const [userId, setUserId] = useState<null | string>(null);
 
     useEffect(() => {
         const checkAuthentication = async () => {
@@ -20,6 +21,7 @@ const AuthProvider  = ({children}:{children:ReactNode}) => {
                     setIsAuthenticated(false);
                 } else {
                     setIsAuthenticated(true);
+                    setUserId(response.data.userId.userId);
                 }
             } catch (error) {
                 console.error("Error While Authenticating..")
@@ -33,7 +35,8 @@ const AuthProvider  = ({children}:{children:ReactNode}) => {
     return (
         <AuthContext.Provider value={{
             isAuthenticated,
-            setIsAuthenticated
+            setIsAuthenticated,
+            userId
         }}>
             {children}
         </AuthContext.Provider>

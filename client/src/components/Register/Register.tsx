@@ -6,6 +6,7 @@ import { useState } from "react";
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from "firebase/auth";
 import './Register.css';
 import { auth } from "../Lib/Firebase";
+import { useRouter } from "next/navigation";
 declare global {
   interface Window {
     recaptchaVerifier?: RecaptchaVerifier;
@@ -20,6 +21,7 @@ const Register = () => {
   const [message, setMessage] = useState("");
   const [otp, setOtp] = useState('');
   const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
+  const router = useRouter();
 
   const sendOTP = async (phoneNumber: string) => {
     try {
@@ -52,6 +54,7 @@ const Register = () => {
 
       setMessage("OTP Verified Successfully ✅");
       console.log("User Token: ", idToken);
+      router.push('/Account');
     } catch (error) {
       console.error("OTP Verification Error: ", error);
       setMessage("Invalid OTP!");

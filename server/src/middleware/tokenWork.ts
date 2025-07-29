@@ -6,8 +6,8 @@ export const generateToken = (payload:Object) => {
     return jwt.sign(payload, process.env.JWT_SECRET!, {expiresIn:'24h'})
 }
 
-interface CustomRequest extends Request {
-    user?:any
+export interface CustomRequest extends Request {
+    userId?:any
 }
 
 
@@ -22,7 +22,7 @@ export const verifyToken = (req : CustomRequest , res : Response , next: NextFun
         if (err) {
             res.status(403).json({success:false, message: "Forbidden!"})
         }
-        req.user = decoded
+        req.userId = decoded
 
     })
     next();
