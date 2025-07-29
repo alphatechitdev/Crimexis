@@ -37,9 +37,16 @@ AuthEndpoint.post('/registerAdmin', async (req, res) => {
         const AC = new AuthController();
         const result = await AC.RegisterAsAdmin(creds);
         if(result.success) {
-            res.status(200).json(result);
+            const token = generateToken({userId:result.adminUserID});
+            res.cookie('CrimexisSessionToken', token, {
+                sameSite:'none',
+                httpOnly:true,
+                secure:true,
+                maxAge: 3600000
+            })
+            res.status(200).json({success:true});
         } else {
-            res.status(400).json(result);
+            res.status(400).json({success:false});
         }
     } catch (error) {
         console.error("Error While Registering The User, ", error);

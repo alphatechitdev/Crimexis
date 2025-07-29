@@ -12,8 +12,10 @@ const AdminSchema = new mongoose.Schema({
     adminName:String,
     adminEmail:String,
     adminPhone:String,
-    adminUsername:String,
+    adminUserId:String,
     adminPassword:String,
+    adminHonestCheck:String,
+    accountStatus:Boolean
 
 });
 

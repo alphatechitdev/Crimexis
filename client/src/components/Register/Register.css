@@ -12,6 +12,7 @@
     background-color: white;
     padding: 20px;
     border-radius: 10px;
+    width: 500px;
 
 }
 
@@ -21,19 +22,26 @@ form {
     justify-content: center;
     width: 100%;
     padding: 20px;
-    background-color: steelblue;
+    background-color: orange;
     color: black;
     border-radius: 10px;
     gap: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
-
+form label {
+    font-weight: bold;
+}
 form input {
     padding: 10px;
     border-radius: 5px;
     background-color: white;
     color: black;
 
+}
+
+form .checkbox{
+    background-color: white;
+    color:black;
 }
 
 form button {
