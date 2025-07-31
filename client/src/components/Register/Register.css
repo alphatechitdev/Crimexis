@@ -1,59 +1,103 @@
+.register-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background-color: black;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+}
 
-.register-page{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-} 
-
-.form-container{
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 500px;
-
+.form-container {
+  background-color: #222;
+  padding: 24px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    padding: 20px;
-    background-color: orange;
-    color: black;
-    border-radius: 10px;
-    gap: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: orange;
+  color: black;
+  border-radius: 10px;
+  padding: 20px;
+  gap: 12px;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
 }
+
 form label {
-    font-weight: bold;
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 0.95rem;
 }
+
 form input {
-    padding: 10px;
-    border-radius: 5px;
-    background-color: white;
-    color: black;
-
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 0.95rem;
+  color: black;
+  transition: border-color 0.3s ease;
 }
 
-form .checkbox{
-    background-color: white;
-    color:black;
+form input:focus {
+  outline: none;
+  border-color: black;
+}
+
+form .checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  background-color: transparent;
+  color: black;
 }
 
 form button {
-    padding: 10px;
-    background-color: black;
-    color: white;
-    border-radius: 5px;
-
-
+  padding: 12px;
+  background-color: black;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: none;
 }
 
 form button:hover {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+@media screen and (max-width: 600px) {
+  .form-container {
+    padding: 16px;
+    width: 100%;
+  }
+
+  form {
+    padding: 16px;
+    gap: 10px;
+  }
+
+  form input {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+
+  form button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
 }

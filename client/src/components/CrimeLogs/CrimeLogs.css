@@ -1,59 +1,94 @@
 .crime-logs-page {
-    background-color: black;
-    min-height: 100vh;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+  background-color: black;
+  min-height: 100vh;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
 }
 
 .crime-type-input {
-    padding: 10px;
-    background-color: black;
-    color: white;
-    font-weight: bold;
-    width: 50%;
-    border: 1px solid white;
-    border-radius: 6px;
+  padding: 8px 12px;
+  background-color: #111;
+  color: white;
+  font-weight: 500;
+  width: 50%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
+}
+
+.crime-type-input:focus {
+  outline: none;
+  border-color: orange;
 }
 
 .crime-table-container {
-    background-color: whitesmoke;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 8px;
-    width: 80%;
-    overflow-x: auto; /* horizontal scroll if table is too wide */
+  background-color: #1a1a1a;
+  padding: 10px 12px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 1200px;
+  overflow-x: auto;
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.1);
 }
 
 table {
-    background-color: orange;
-    color: black;
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: bold;
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 600px; 
+  background-color: orange;
+  color: black;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 table th,
 table td {
-    padding: 8px 12px;
-    text-align: left;
-    border: 1px solid black;
+  padding: 6px 10px;
+  text-align: left;
+  border: 1px solid #333;
+  white-space: nowrap;
+}
+
+table th {
+  background-color: #ffe5a1;
+  color: #000;
+  font-weight: 600;
+}
+
+table tr:nth-child(even) {
+  background-color: #fdf2d5;
+}
+
+table tr:hover {
+  background-color: #fff2c4;
 }
 
 @media screen and (max-width: 768px) {
-    .crime-type-input {
-        width: 90%;
-    }
+  .crime-type-input {
+    width: 90%;
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
 
-    .crime-table-container {
-        width: 100%;
-        padding: 8px;
-    }
+  .crime-table-container {
+    padding: 8px;
+    width: 100%;
+  }
+
+  table {
+    font-size: 0.8rem;
+  }
+
+  table th,
+  table td {
+    padding: 5px 8px;
+  }
 }

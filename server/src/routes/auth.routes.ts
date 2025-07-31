@@ -54,12 +54,18 @@ AuthEndpoint.post('/registerAdmin', async (req, res) => {
 
 AuthEndpoint.post('/registerUser', async (req , res) => {
     try {
-        const {creds} = req.body;
+        const {userCreds} = req.body;
         const AC = new AuthController();
-        const result = await AC.Regist
+        const result = await AC.RegisterUser(userCreds); 
+        if (!result.success) {
+            res.status(400).json({success:false})
+        } else {
+            res.status(200).json(result);
+        }
     } catch (error) {
         console.error("Error While Registering The User, ", error);
+        res.status(500).json({success:false, message:"Internal Server Error!"})
     }
-})
+});
 
 export default AuthEndpoint;

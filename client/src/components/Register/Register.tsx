@@ -20,7 +20,8 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [otp, setOtp] = useState('');
-  const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setConfirmationResult] = useState<ConfirmationResult | null>(null);
   const router = useRouter();
 
   const sendOTP = async (phoneNumber: string) => {
@@ -30,8 +31,8 @@ const Register = () => {
       }
       window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
         size: 'invisible',
-        callback: (response: any) => {
-          console.log("reCAPTCHA verified");
+        callback: (response: unknown) => {
+          console.log("reCAPTCHA verified", response);
         }
       });
 
@@ -117,8 +118,8 @@ const Register = () => {
             {errors.adminPhone && <p style={{ color: 'red' }}>{errors.adminPhone.message}</p>}
 
             <label>Admin Password:</label>
-            <input type="password" {...register("adminPassword", { required: "Password required" })} />
-            {errors.adminPassword && <p style={{ color: 'red' }}>{errors.adminPassword.message}</p>}
+            <input type="password" {...register("password", { required: "Password required" })} />
+            {errors.password && <p style={{ color: 'red' }}>{errors.password.message}</p>}
             <div style={{display:"flex", flexDirection:"row" , marginTop:"10px", gap:"10px"}}>
             <input type="checkbox" {...register("adminHonestCheck", {required:true})} className="checkbox"/>
             <label>I Accept That Above Information Is True</label>

@@ -28,6 +28,7 @@ export async function GET(req : Request) {
             }
         })
     } catch (error) {
+        console.error("Error While Rev Geocoding, ", error);
         return new Response(JSON.stringify({error:"Error While Fetching Location"}), 
         {status:500}
     )

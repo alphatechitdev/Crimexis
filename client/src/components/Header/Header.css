@@ -1,10 +1,8 @@
 header {
     background-color: black;
     padding: 20px;
-    justify-content: center;
-    align-items: center;
     text-align: center;
-    gap: 2rem;
+    position: relative;
 }
 
 ul {
@@ -33,15 +31,17 @@ ul .active-link {
 }
 
 .hamburger-btn {
-    margin-left: 0px;
-    margin-right: 1380px;
-    padding: 10px;
-    font-size: x-large;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    padding: 10px 15px;
+    font-size: 20px;
     font-weight: bold;
     background-color: whitesmoke;
     color: black;
     border-radius: 5px;
-
+    display: none; 
+    z-index: 1600;
 }
 
 .sidebar {
@@ -76,12 +76,12 @@ ul .active-link {
     flex-direction: column;
     gap: 15px;
 }
+
 .sidebar ul .active-link {
     background-color: white;
     color: black;
 }
 
-/* Optional overlay behind sidebar */
 .sidebar-overlay {
     position: fixed;
     top: 0;
@@ -93,17 +93,19 @@ ul .active-link {
 }
 
 @media screen and (max-width: 768px) {
-    header {
-        padding: 15px;
-    }
+  ul {
+    display: flex; /* keep it visible on small screens */
+    flex-direction: column;
+    align-items: center;
+  }
 
-    ul {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
+  .hamburger-btn {
+    display: block;
+  }
 
-    li {
-        width: 100%;
-        text-align: center;
-    }
+  /* Hide main nav only if sidebar is open */
+  header ul.hide-on-sidebar {
+    display: none;
+  }
 }
+

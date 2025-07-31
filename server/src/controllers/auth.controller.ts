@@ -31,6 +31,20 @@ class AuthRulesController {
         }
     }
 
+    async updateSeries(series:string, totalType:string) {
+        try {
+            const updatedOne = await CrimexisProtcModel.updateOne({}, {
+                $set : {
+                    [series]: {
+                        [totalType] : +1
+                    }
+                }
+            })
+        } catch (error) {
+            console.error("Error While Updating The Users, ", error);
+        }
+    }
+
 
     async getCurrentAdminSeries() {
         try {
@@ -85,6 +99,9 @@ class AuthController extends AuthRulesController{
             RegisterData.adminUserId = await this.genarateUsername("admin");
             
             const admin = await Admins.insertOne(RegisterData);
+            await CrimexisProtcModel.updateOne({}, {
+                $inc:{[`adminSeries.${RegisterData.adminUserId.slice(0,7)}.totalAdmins`]:1}
+            })
             return {success:true, adminUserID:admin.adminUserId};
 
         } catch (error) {
@@ -99,7 +116,10 @@ class AuthController extends AuthRulesController{
             creds.password = hashedPassword;
             creds.userId = await this.genarateUsername("user");
             const user = await User.insertOne(creds);
-            return {success:true};
+            await CrimexisProtcModel.updateOne({}, {
+                $inc:{[`userSeries.${creds.userId.slice(0,7)}.totalUsers`]:1}
+            })
+            return {success:true, userId:creds.userId};
 
         } catch (error) {
             console.error("Error While Registering, ", error);

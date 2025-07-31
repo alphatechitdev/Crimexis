@@ -1,36 +1,81 @@
-
-
-
-.intro-page{
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100vh;
+.intro-page {
+  background-color: black;
+  color: white;
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .hero {
-    background-color: aliceblue;
-    color: black;
-    padding: 20px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  margin-bottom: 2rem;
+  max-width: 700px;
+}
+
+.main-heading {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: orange;
+}
+
+.brand {
+  color: #f1c76a;
+}
+
+.sub-heading {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #ccc;
+  line-height: 1.6;
 }
 
 .CTA {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.CTA button {
-    padding: 20px;
-    background-color:white;
-    color: black;
-    
+.cta-button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.cta-button.primary {
+  background-color: orange;
+  color: black;
+}
+
+.cta-button.secondary {
+  background-color: white;
+  color: black;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.4);
+}
+
+@media screen and (max-width: 768px) {
+  .main-heading {
+    font-size: 2rem;
+  }
+
+  .sub-heading {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    width: 100%;
+    max-width: 300px;
+  }
 }

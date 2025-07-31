@@ -24,7 +24,7 @@ const AuthProvider  = ({children}:{children:ReactNode}) => {
                     setUserId(response.data.userId.userId);
                 }
             } catch (error) {
-                console.error("Error While Authenticating..")
+                console.error("Error While Authenticating, ", error)
                 setIsAuthenticated(false);
             }
         }  

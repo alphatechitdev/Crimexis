@@ -1,7 +1,4 @@
-
-
-
-.login-page{
+.login-page {
     background-color: black;
     display: flex;
     flex-direction: column;
@@ -9,14 +6,21 @@
     justify-content: center;
     text-align: center;
     align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-
-.form-container{
-    background-color: white;
+.form-container {
+    background-color: #222;
     padding: 20px;
     border-radius: 10px;
+    width: 100%;
+    max-width: 400px; 
+    box-sizing: border-box;
+}
 
+form label {
+    font-weight: bold;
 }
 
 form {
@@ -25,31 +29,58 @@ form {
     justify-content: center;
     width: 100%;
     padding: 20px;
-    background-color: orange;
+    background-color: #ffa500;
     color: black;
     border-radius: 10px;
-    gap: 5px;
+    gap: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+}
+
+form input,
+form button {
+    padding: 12px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+    box-sizing: border-box;
+    border: none;
 }
 
 form input {
-    padding: 10px;
-    border-radius: 5px;
     background-color: white;
     color: black;
-
+    border: 1px solid #ccc;
 }
 
 form button {
-    padding: 10px;
     background-color: black;
     color: white;
-    border-radius: 5px;
-
-
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 form button:hover {
     background-color: white;
     color: black;
+    border: 1px solid black;
+}
+
+@media (max-width: 600px) {
+    .login-page {
+        padding: 10px;
+    }
+
+    .form-container {
+        padding: 15px;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    form input,
+    form button {
+        font-size: 0.95rem;
+    }
 }

@@ -10,14 +10,7 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APPID,
 };
 
-const firebaseConfig2 = {
-  apiKey: "AIzaSyBNUfRUhaE6uSU8VKEqLRnwqmVlCLZL5qk",
-  authDomain: "crimexis-auth.firebaseapp.com",
-  projectId: "crimexis-auth",
-  storageBucket: "crimexis-auth.firebasestorage.app",
-  messagingSenderId: "570115922127",
-  appId: "1:570115922127:web:adc24962c42c0d97407fba"
-};
+
 
 const app = initializeApp(firebaseConfig);
 

@@ -1,0 +1,106 @@
+
+
+.account-page{
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.add-user{
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.add-user button {
+    background-color: orange;
+    color: black;
+    padding: 10px;
+
+}
+
+
+.account-page {
+  padding: 2rem;
+  background-color: black;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.account-status {
+  background-color: #222;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.account-info-box {
+  background-color: #1a1a1a;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.account-info-box h2 {
+  margin-bottom: 1rem;
+  color: orange;
+}
+
+.account-info-box p {
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.add-user button {
+  padding: 10px 15px;
+  font-weight: bold;
+  border-radius: 8px;
+  background-color: orange;
+  color: black;
+  cursor: pointer;
+  border: none;
+}
+
+.change-password-section {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.change-password-btn {
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.change-password-btn:hover {
+  background-color: orange;
+  color: black;
+}
+
+@media screen and (max-width: 768px) {
+  .account-page {
+    padding: 1rem;
+  }
+
+  .account-info-box {
+    padding: 1rem;
+  }
+
+  .change-password-btn {
+    width: 100%;
+  }
+}
+

@@ -1,67 +1,101 @@
-
-
-.hotspots-page{
-    height: 100vh;
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+.hotspots-page {
+  min-height: 100vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  gap: 20px;
+  box-sizing: border-box;
 }
-
-.hotspots-menu{
-    background-color: whitesmoke;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(255, 253, 253, 0.955);
-}
-
-.hotspots-menu button{
-    width: 50%;
-    padding: 10px;
-    background-color: black;
-    color: white;
-    font-weight: bold;
-    border-radius: 8px;
-}
-.hotspots-location{
-    background-color:whitesmoke;
-    padding: 10px;
-    color: black;
-    display: grid;
-    width: 50%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(255, 253, 253, 0.955);
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 5px;
-}
-.crime-type-input{
-    padding: 10px;
-    width: 50%;
-    background-color: black;
-    color: white;
-}
-.locations{
-    background-color: orange;
-    padding: 10px;
-    border-radius: 8px;
-    color: black;
-}
-
- @media screen and (max-width:768px) {
-   
 
 .hotspots-menu {
-    width: 360px;
+  background-color: #222;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(14, 14, 14, 0.955);
+  box-sizing: border-box;
 }
-.hotspots-location {
-    width: 360px;
 
+.hotspots-menu button {
+  width: 100%;
+  max-width: 300px;
+  padding: 12px;
+  background-color: orange;
+  color: black;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
- }
+
+.hotspots-menu button:hover {
+  background-color: rgb(238, 206, 123);
+  color: black;
+}
+
+.crime-type-input {
+  padding: 12px;
+  width: 100%;
+  max-width: 600px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hotspots-location {
+  background-color: #222;
+  padding: 20px;
+  color: black;
+  display: grid;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(4, 3, 3, 0.955);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.locations {
+  background-color: orange;
+  padding: 15px;
+  border-radius: 8px;
+  color: black;
+  font-weight: bold;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .hotspots-page {
+    padding: 10px;
+  }
+
+  .hotspots-menu,
+  .hotspots-location {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .crime-type-input {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .hotspots-menu button {
+    font-size: 0.95rem;
+  }
+}

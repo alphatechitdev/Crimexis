@@ -1,5 +1,6 @@
+"use client";
 import {MapContainer, TileLayer, Marker, useMapEvents} from 'react-leaflet';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import axios from 'axios';
 
 function LocationSelector ({onSelect}:{onSelect:(latlng:{lat:number, lng:number})=> void}) {

@@ -39,6 +39,7 @@ const AddCrime = () => {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/crimework/addCrime`,{data});
             if (response.data.success) {
                 alert("Crime Data Added Successfuly")
+                setCrimeData(data)
             } else {
                 alert("Crime Data Not Addess")
 

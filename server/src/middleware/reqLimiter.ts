@@ -8,7 +8,7 @@ const customLimiter = rateLimiter({
         const ip = req.ip;
         const now = new Date().toISOString();
 
-        const attemptedUser = req.body?.creds.username || "unknown";
+        const attemptedUser = req.body?.creds.userId || "unknown";
 
         const BFLC = new BruteForceLogController();
         const result = await BFLC.logBruteForce(ip, attemptedUser, now);

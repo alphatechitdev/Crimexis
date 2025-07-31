@@ -3,7 +3,10 @@ import { Metadata } from "next";
 
 
 export const metadata : Metadata = {
-    title:"Crime Logs"
+    title: "Crime Logs",
+    icons: {
+        icon:'./favicon.ico'
+    }
 }
 
 export default function CrimeLogsPage(){

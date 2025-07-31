@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const Header = () => {
-    let currentPath = usePathname();
+    const currentPath = usePathname();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const toggleSidebar = () => {
@@ -18,7 +18,9 @@ const Header = () => {
     return (
         <>
             <header>
+                {!isSidebarOpen && (
                 <button className="hamburger-btn" onClick={toggleSidebar}>☰</button>
+                )}
 
 
                 <Image src={logo} className="header-logo" alt="logo" height={200} width={200}/>

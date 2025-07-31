@@ -1,6 +1,11 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import './DynamicForm.css';
-import CrimeMapForm from "../MapLocation/CrimeMapForm";
+import dynamic from "next/dynamic";
+
+const CrimeMapForm = dynamic(() => import("../MapLocation/CrimeMapForm"), {
+  ssr: false,
+});
 
 interface DynamicFormProps<T>{
     initialData:T;
@@ -11,24 +16,34 @@ interface DynamicFormProps<T>{
 export default function DynamicForm<T>({initialData, onSubmit}:DynamicFormProps<T>){
 
     const [formData, setFormData] = useState<T>(initialData);
-    const [crimeCoordinates, setCrimeCoordinates] = useState<{lat:number, lng:number}|null>(null);
-    const [crimeLocation, setCrimeLocation] = useState<string>("");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_, setCrimeCoordinates] = useState<{lat:number, lng:number}|null>(null);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [__, setCrimeLocation] = useState<string>("");
 
 
-    const handleMapSelect = (data:{cords:{lat:number, lng:number} | null, location:string}) => {
-        setCrimeCoordinates(data.cords);
-        setCrimeLocation(data.location);
+   const handleMapSelect = (data: { cords: { lat: number; lng: number } | null, location: string }) => {
+  setCrimeCoordinates(data.cords);
+  setCrimeLocation(data.location);
 
-        setFormData(prev => {
-            const updated = structuredClone(prev as any);
+  setFormData((prev) => {
+    const updated = structuredClone(prev);
 
-            if (data.cords) {
-                updated.coordinates = data.cords
-            }
-            updated.crimeLocation = data.location;
-            return updated;
-        })
+    // 👇 Safely cast only for this operation
+    const patchable = updated as typeof updated & {
+      coordinates?: { lat: number; lng: number };
+      crimeLocation?: string;
+    };
+
+    if (data.cords) {
+      patchable.coordinates = data.cords;
     }
+    patchable.crimeLocation = data.location;
+
+    return patchable;
+  });
+};
+
 
 
     useEffect(() => {
@@ -179,7 +194,7 @@ export default function DynamicForm<T>({initialData, onSubmit}:DynamicFormProps<
 
              if (typeof value === "object" && value !== null && !Array.isArray(value)) {
                 return (
-                    <div className="dynamic-form-grid">
+                    <div className="dynamic-form-grid" key={uniqueKey}>
                         <strong>{key}</strong>
                         {renderFields(value, currentPath)}
 

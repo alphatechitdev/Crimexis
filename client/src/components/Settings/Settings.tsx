@@ -6,14 +6,16 @@ import { SettingsDataTypes } from '../Types/settings.data.types';
 
 
 const Settings = () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_, setSettingsData] = useState<SettingsDataTypes>()
 
-    const [settingsData, setSettingsData] = useState<SettingsDataTypes>()
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [defaultSettings, setDefaultSettings] = useState<SettingsDataTypes>({
         siteTitle:"Crimexis",
         maintenaceNode:true,
         allowUserRegistration:true,
-    })
+    });
+
 
 
     const fetchSettings = async () => {
@@ -33,13 +35,13 @@ const Settings = () => {
 
     useEffect(() => {
         fetchSettings();
-    }, []);
+    });
 
 
 
     return (
         <div className="settings-page">
-           <h2>New Users</h2>
+           <h2>Under Development</h2>
 
         </div>
     )

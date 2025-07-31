@@ -12,11 +12,11 @@ const Hotspots = () => {
     const [hotspotMessage, setHotspotMessage] = useState("");
 
     const [hotspotData, setHotspotData] = useState<HotspotsDataTypes>();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [hotspots, setHotspots] = useState<HotspotsDataTypes["hotspots"]>([]);
 
     const getHotspots = async (crimeType:string) => {
         try {
-            const hotspotsLocations = [];
             const response = await axios.get(`${process.env.NEXT_PUBLIC_ML_URL}/getHotspots?crimeType=${crimeType}`);
             const hotspots = response.data.hotspots;
 
@@ -120,11 +120,12 @@ const Hotspots = () => {
                 <option value="Terrorism">Terrorism</option>
             </select>
                 <button onClick={() => getHotspots(crimeType)}>Find Hotspots</button>
+                <br/>
                 <button onClick={() => updateHotspotsRecords()}>Update Hotspots</button>
                 </div>
                 <div className='hotspots-location'>
-                {hotspotsLocations && hotspotsLocations.map((hotspot) => (
-                    <div className='locations'>
+                {hotspotsLocations && hotspotsLocations.map((hotspot, index) => (
+                    <div className='locations' key={index}>
                         <h3>{hotspot}</h3>
                     </div>
                 ))}
