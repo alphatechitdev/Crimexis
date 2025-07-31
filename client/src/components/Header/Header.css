@@ -40,7 +40,7 @@ ul .active-link {
     background-color: whitesmoke;
     color: black;
     border-radius: 5px;
-    display: none; 
+    display: block; 
     z-index: 1600;
 }
 
@@ -92,6 +92,13 @@ ul .active-link {
     z-index: 1400;
 }
 
+.lgout-button {
+    background-color: #f44336;
+    padding: 10px;
+    border-radius: 10px;
+    color: whitesmoke;
+}
+
 @media screen and (max-width: 768px) {
   ul {
     display: flex; /* keep it visible on small screens */
@@ -103,9 +110,6 @@ ul .active-link {
     display: block;
   }
 
-  /* Hide main nav only if sidebar is open */
-  header ul.hide-on-sidebar {
-    display: none;
-  }
+  
 }
 

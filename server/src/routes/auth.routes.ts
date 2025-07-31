@@ -5,6 +5,22 @@ import customLimiter from '../middleware/reqLimiter.ts';
 const AuthEndpoint = express.Router();
 
 
+AuthEndpoint.get('/logout', async (req, res) => {
+  try {
+    res.clearCookie('CrimexisSessionToken', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      path: '/'
+    });
+    res.status(200).json({ success:true, message: 'Logged out' });
+  } catch (error) {
+    console.error("Error While Logging Out: ", error);
+    res.status(500).json({ message: 'Logout Failed!' });
+  }
+});
+
+
 
 AuthEndpoint.post('/login', customLimiter, async (req, res) => {
     try {
