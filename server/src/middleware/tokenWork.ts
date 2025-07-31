@@ -15,12 +15,12 @@ export const verifyToken = (req : CustomRequest , res : Response , next: NextFun
     const token = req.cookies.CrimexisSessionToken;
 
     if (!token) {
-        res.status(401).json({success:false, message: "Unauthorized!"})
+        return res.status(401).json({success:false, message: "Unauthorized!"})
     }
 
     jwt.verify(token, process.env.JWT_SECRET!, (err : VerifyErrors | null, decoded: JwtPayload | string | undefined) => {
         if (err) {
-            res.status(403).json({success:false, message: "Forbidden!"})
+            return res.status(403).json({success:false, message: "Forbidden!"})
         }
         req.userId = decoded
 

@@ -36,7 +36,8 @@ AuthEndpoint.post('/login', customLimiter, async (req, res) => {
                 httpOnly:true,
                 secure:true,
                 maxAge: 3600000
-            })
+            });
+            
             res.status(200).json(result);
         }
     } catch (error) {
