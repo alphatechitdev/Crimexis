@@ -1,8 +1,6 @@
 import moongose from 'mongoose';
 
 
-
-
 const connectToMongoose = async () => {
     try {
         await moongose.connect(process.env.MONGO_URI as string, {

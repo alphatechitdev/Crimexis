@@ -4,12 +4,11 @@ import CrimeMapForm from "../MapLocation/CrimeMapForm";
 
 interface DynamicFormProps<T>{
     initialData:T;
-    onChange:(updatedData:T) => void;
     onSubmit:(finalData:T) => void;
 }
 
 
-export default function DynamicForm<T>({initialData, onChange, onSubmit}:DynamicFormProps<T>){
+export default function DynamicForm<T>({initialData, onSubmit}:DynamicFormProps<T>){
 
     const [formData, setFormData] = useState<T>(initialData);
     const [crimeCoordinates, setCrimeCoordinates] = useState<{lat:number, lng:number}|null>(null);

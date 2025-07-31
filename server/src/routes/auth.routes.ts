@@ -9,7 +9,6 @@ const AuthEndpoint = express.Router();
 AuthEndpoint.post('/login', customLimiter, async (req, res) => {
     try {
         const {creds} = req.body;
-        console.log("IP Address, ", req.ip);
         const AC = new AuthController();
         const result = await AC.Login(creds);
         if(!result.success) {
@@ -48,6 +47,16 @@ AuthEndpoint.post('/registerAdmin', async (req, res) => {
         } else {
             res.status(400).json({success:false});
         }
+    } catch (error) {
+        console.error("Error While Registering The User, ", error);
+    }
+});
+
+AuthEndpoint.post('/registerUser', async (req , res) => {
+    try {
+        const {creds} = req.body;
+        const AC = new AuthController();
+        const result = await AC.Regist
     } catch (error) {
         console.error("Error While Registering The User, ", error);
     }

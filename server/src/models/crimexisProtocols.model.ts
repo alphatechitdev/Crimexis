@@ -9,11 +9,23 @@ const singleSeriesSchema = new mongoose.Schema({
 
 })
 
+const singleSeriesSchemaUser = new mongoose.Schema({
+    series:String,
+    totalUsers:Number,
+    activeUsers:Number,
+
+})
+
 const CrimexisProtocolsSchema = new mongoose.Schema({
     currentAdminSeries:String,
     adminSeries: {
         type:Map,
         of:singleSeriesSchema,
+    },
+    currentUserSeries:String,
+    userSeries: {
+        type:Map,
+        of:singleSeriesSchemaUser,
     }
     
 });

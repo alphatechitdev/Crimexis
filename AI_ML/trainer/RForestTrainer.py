@@ -27,7 +27,7 @@ def TrainRandomForest(data):
     
     
     df["crimeType"] = le_crimeType.fit_transform(df["crimeType"])
-    df["victim.0.Profession"] = le_profession.fit_transform(df["victim.0.Profession"])
+    df["victim.0.profession"] = le_profession.fit_transform(df["victim.0.profession"])
     df["reportedBy"] = le_reportedBy.fit_transform(df["reportedBy"])
     df["severityLevel"] = le_severity.fit_transform(df["severityLevel"])
     

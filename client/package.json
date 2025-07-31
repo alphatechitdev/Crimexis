@@ -19,7 +19,8 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.59.0",
     "react-leaflet": "^5.0.0",
-    "react-phone-input-2": "^2.15.1"
+    "react-phone-input-2": "^2.15.1",
+    "vercel": "^44.6.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

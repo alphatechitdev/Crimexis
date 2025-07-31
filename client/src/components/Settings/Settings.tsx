@@ -1,4 +1,4 @@
-
+"use client";
 import axios from 'axios';
 import './Settings.css';
 import { useEffect, useState } from 'react';
@@ -40,7 +40,7 @@ const Settings = () => {
     return (
         <div className="settings-page">
            <h2>New Users</h2>
-           
+
         </div>
     )
 };

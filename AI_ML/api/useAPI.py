@@ -2,11 +2,16 @@
 from fastapi import FastAPI, Query
 from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 from models.kMeans import ApplyKMeans
 from trainer.RForestTrainer import TrainRandomForest
 from dataController.crimeController import fetchCrimeData, clean_crime_data
+from controllers.RFcontroller import ApplyRF
 import joblib
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+RFmodel_path = os.path.join(current_dir, '..', 'models', 'RForest.pkl')
 
 app = FastAPI()
 
@@ -34,6 +39,8 @@ def trainRForest():
     TrainRandomForest(crimeData)
     
     
-@app.get('/getSeverity')
-def getSeverity():
-    model = joblib.load()
+@app.post('/getSeverity')
+def getSeverity(data):
+    model = joblib.load(RFmodel_path)
+    severity = ApplyRF(data=data, model=model)
+    return severity

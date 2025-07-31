@@ -1,5 +1,5 @@
-import BruteForceLog from "../models/bruteforcelog.model.ts";
 import fs from 'fs';
+import BruteForceLog from '../models/bruteforcelog.model.ts';
 
 class BruteForceLogController {
     constructor () {

@@ -21,7 +21,7 @@ const AddCrime = () => {
             lat:0,
             lng:0,
         },
-        crimeTime:"",
+        crimeTime: new Date(),
         involvedPeople:[
             {
                 name:"",

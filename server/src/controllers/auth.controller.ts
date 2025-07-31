@@ -4,13 +4,31 @@ import hashPassword, { verifyPassword } from '../utilities/hashing.ts';
 import User from '../models/user.model.ts';
 import Admins from '../models/admins.model.ts';
 import CrimexisProtcModel from '../models/crimexisProtocols.model.ts';
-
-
+import { UserCredsDataTypes } from '../Types/userRegister.creds.types.ts';
 
 
 class AuthRulesController {
     constructor () {
 
+    }
+
+    async getCurrentUserSeries () {
+        try {
+            const result = await CrimexisProtcModel.findOne({});
+            const userSeriesName = result?.currentUserSeries;
+
+            if (!result || !userSeriesName) return null;
+
+            const currentSeries = result.userSeries?.get(userSeriesName);
+            
+            return {
+                userSeriesName,
+                userSeriesNumber: currentSeries?.totalUsers ?? 0
+                };
+        } catch (error) {
+            console.error("Error To Fetch The Admin Series, ", error);
+            return null;
+        }
     }
 
 
@@ -41,11 +59,9 @@ class AuthController extends AuthRulesController{
 
     async Login(LoginCreds:LoginCredsTypes) {
         try {
-            console.log("User If", LoginCreds);
             let foundUser = null;
             if (LoginCreds.userId.includes("ADM")) {
                 foundUser = await Admins.findOne({ adminUserId: LoginCreds.userId });
-                console.log("Found In")
             } else {
                 foundUser = await User.findOne({userId:LoginCreds.userId});
             }
@@ -63,13 +79,27 @@ class AuthController extends AuthRulesController{
 
     async RegisterAsAdmin(RegisterData:RegisterCreds) {
         try {
-            const hashedPassword = await hashPassword(RegisterData.adminPassword);
+            const hashedPassword = await hashPassword(RegisterData.password);
 
-            RegisterData.adminPassword = hashedPassword;
-            RegisterData.adminUserId = await this.genarateUsername();
+            RegisterData.password = hashedPassword;
+            RegisterData.adminUserId = await this.genarateUsername("admin");
             
             const admin = await Admins.insertOne(RegisterData);
             return {success:true, adminUserID:admin.adminUserId};
+
+        } catch (error) {
+            console.error("Error While Registering, ", error);
+            return {success:false};
+        }
+    }
+
+    async RegisterUser(creds:UserCredsDataTypes) {
+        try {
+            const hashedPassword = await hashPassword(creds.password);
+            creds.password = hashedPassword;
+            creds.userId = await this.genarateUsername("user");
+            const user = await User.insertOne(creds);
+            return {success:true};
 
         } catch (error) {
             console.error("Error While Registering, ", error);
@@ -87,10 +117,17 @@ class AuthController extends AuthRulesController{
 
 
     
-    async genarateUsername () {
+    async genarateUsername (role:string) {
         try {
-            const admin  = await this.getCurrentAdminSeries();
-            const username = `${admin?.adminSeriesName}-${Number(admin?.adminSeriesNumber)+1}`
+            let username = '';
+            if (role === "admin") {
+                const admin  = await this.getCurrentAdminSeries();
+                username = `${admin?.adminSeriesName}-${Number(admin?.adminSeriesNumber)+1}`
+            } else {
+                const user = await this.getCurrentUserSeries();
+                username = `${user?.userSeriesName}-${Number(user?.userSeriesNumber)+1}`
+
+            }
             return username;
         } catch (error) {
             console.log("Error While Generating Username, ", error);
