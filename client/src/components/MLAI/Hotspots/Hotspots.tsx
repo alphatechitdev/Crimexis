@@ -7,6 +7,8 @@ import { HotspotsDataTypes } from '@/components/Types/hotspot.data.types';
 const Hotspots = () => {
 
     const [crimeType, setCrimeType] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const [hotspotsLocations, setHotspotsLocations] = useState<string[]>([]);
     const [hotspotMessage, setHotspotMessage] = useState("");
@@ -17,6 +19,8 @@ const Hotspots = () => {
 
     const getHotspots = async (crimeType:string) => {
         try {
+            setHotspotMessage("Predicting Hotspots...");
+            setIsLoading(true);
             const response = await axios.get(`${process.env.NEXT_PUBLIC_ML_URL}/getHotspots?crimeType=${crimeType}`);
             const hotspots = response.data.hotspots;
 
@@ -46,11 +50,16 @@ const Hotspots = () => {
                 ...prev,
                 crimeType:crimeType,
                 hotspots:finalHotspots
-            }))
+            }));
+            setHotspotMessage("")
 
           
         } catch (error) {
+            setHotspotMessage("Failed to Predict / Analyze Hotspots. Try Again!");
+            setIsLoading(false);
             console.error("Error While Getting Hotspots, ", error);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -93,9 +102,6 @@ const Hotspots = () => {
 
     return (
         <div className="hotspots-page">
-            <div className='hotspot-message-div'>
-                <strong>{hotspotMessage}</strong>
-            </div>
             <div className='hotspots-menu'>
               <select
                 onChange={(e) => setCrimeType(e.target.value)}
@@ -122,6 +128,13 @@ const Hotspots = () => {
                 <button onClick={() => getHotspots(crimeType)}>Find Hotspots</button>
                 <br/>
                 <button onClick={() => updateHotspotsRecords()}>Update Hotspots</button>
+                <br/>
+                 <div className='hotspot-message-div'>
+                <strong>{hotspotMessage}</strong></div>
+                <br/>
+                {isLoading && (
+                    <div className='spinner'></div>
+                )}
                 </div>
                 <div className='hotspots-location'>
                 {hotspotsLocations && hotspotsLocations.map((hotspot, index) => (

@@ -21,6 +21,7 @@ const Login = () => {
     const Login  = async (creds:LoginCredsTypes) => {
         try {
             setIsLoading(true);
+            setMessage("");
             const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`, {creds}, {
                 withCredentials:true
             });
@@ -43,6 +44,7 @@ const Login = () => {
     return (
         <div className="login-page">
             <div className='form-container'>
+                <h1>LOGIN IN</h1>
             <form onSubmit={handleSubmit(Login)}>
                 <label>UserId/RegId:</label>
                 <input type='text' {...register("userId", {required:true})}/>
@@ -54,6 +56,9 @@ const Login = () => {
 
                 <button type="submit">{isLoading ? "Logging In" : "Login"}</button>
                 {message && <p>{message}</p>}
+                {isLoading && (
+                <div className='spinner'></div>
+                )}
             </form>
                </div>
         </div>

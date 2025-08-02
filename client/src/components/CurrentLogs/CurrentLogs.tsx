@@ -9,13 +9,18 @@ import './CurrentLogs.css';
 const CurrentLogs = () => {
 
     const [hotspots, setHotspots]  = useState<HotspotsDataTypes[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState("");
 
 
     const fetchHotspots = async () => {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/hotspots/fetchHotspots`);
-        const responseData = response.data;
-        
-        setHotspots(responseData.hotspots);
+        try {
+
+        } catch (error) {
+
+        } finally {
+            
+        }
 
     }
 
@@ -29,6 +34,7 @@ const CurrentLogs = () => {
         <div className="current-logs">
             <h1>Latest Hotspots</h1>
             <div className="hotspots">
+                
                 {hotspots && (
                     hotspots.map((hotspot, index) => (
                         <div key={index} className="hotspot-box">
