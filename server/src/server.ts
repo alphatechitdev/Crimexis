@@ -13,7 +13,7 @@ import AccountEndpoint from './routes/account.routes.ts';
 
 const app = express();
 
-app.set('trust proxy', true);
+app.set('trust proxy', 1);
 
 app.use(express.json());
 app.use(cookieParser());
