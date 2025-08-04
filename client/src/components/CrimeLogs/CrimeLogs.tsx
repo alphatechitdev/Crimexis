@@ -6,6 +6,8 @@ import { CrimeDataTypes } from "../Types/crimes.data.types";
 import './CrimeLogs.css'
 
 const CrimeLogs = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState("");
 
     const [crimeData, setCrimeData] = useState<CrimeDataTypes[]>()
     const [crimeType, setCrimeType] = useState<null | string>(null);
@@ -13,6 +15,8 @@ const CrimeLogs = () => {
     const fetchCrimeData = async (crimeType:string | null) => {
 
         try {
+            setIsLoading(true);
+            setMessage("Getting Data...")
             const response = await axios.get(`
                 ${process.env.NEXT_PUBLIC_BACKEND_URL}/api/crimework/fetchCrimeData`
                 + (crimeType ? `?crimeType=${crimeType}` : "")
@@ -21,6 +25,11 @@ const CrimeLogs = () => {
             setCrimeData(crime_data);
         } catch (error) {
             console.error("Error While Fetching The Crime Data, ", error);
+            setIsLoading(false);
+            setMessage("Failed to Get Data...")
+        } finally {
+            setIsLoading(false);
+            setMessage("")
         }
     }
 
@@ -59,6 +68,12 @@ const CrimeLogs = () => {
                 <option value="Rape">Rape</option>
                 <option value="Terrorism">Terrorism</option>
             </select>
+            <div style={{justifyContent:"center", marginTop:"30px"}}>
+            {isLoading && (
+                <div className="spinner"></div>
+            )}
+            {message}
+            </div>
             <div className="crime-table-container">
                 <table>
                     <thead>

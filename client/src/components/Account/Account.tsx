@@ -26,6 +26,13 @@ const Account = () => {
         }
     }, [userId]);
 
+    useEffect(() => {
+        if (accountData) {
+        alert(`Use This UserId For Login: ${accountData?.adminUserId}`)
+        }
+    }, [accountData])
+
+
     return (
         <div className="account-page">
             {userId?.includes("ADM") &&

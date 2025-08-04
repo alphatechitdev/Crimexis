@@ -54,8 +54,6 @@ const Header = () => {
                     <li className={currentPath === '/Dashboard' ? "active-link" : ''}><Link href='/Dashboard'>Home/Dashboard</Link></li>
                     <li className={currentPath === '/Settings' ? "active-link" : ''}><Link href='/Settings'>Manage Settings</Link></li>
                     <li className={currentPath === '/Account' ? "active-link" : ''}><Link href='/Account'>Manage Account</Link></li>
-                    <li className={currentPath === '/Session&Network' ? "active-link" : ''}><Link href='/Session&Network'>Network & Session</Link></li>
-                    <li className={currentPath === '/ContactDeveloper' ? "active-link" : ''}><Link href='/ContactDeveloper'>Contact Developer</Link></li>
                 </ul>
             </div>
 

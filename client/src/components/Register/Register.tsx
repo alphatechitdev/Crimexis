@@ -7,6 +7,7 @@ import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from "fi
 import './Register.css';
 import { auth } from "../Lib/Firebase";
 import { useRouter } from "next/navigation";
+import ConnectingWindow from "../LoadingWindows/ConnectingWindow";
 declare global {
   interface Window {
     recaptchaVerifier?: RecaptchaVerifier;
@@ -71,7 +72,7 @@ const Register = () => {
         return;
       }
 
-      const response = await axios.post(`${apiUrl}/api/auth/registerAdmin`, { creds });
+      const response = await axios.post(`${apiUrl}/api/auth/registerAdmin`, { creds }, {withCredentials:true});
 
       if (response.data.success) {
         await sendOTP(creds.adminPhone);
@@ -92,6 +93,7 @@ const Register = () => {
     <div className="register-page">
       {!otpPhase ? (
         <div className="form-container">
+          <h1 style={{textAlign:"center"}}>Register</h1>
           <form onSubmit={handleSubmit(onRegister)}>
             <label>Department Name:</label>
             <input type="text" {...register("departmentName", { required: "Department name is required" })} />
@@ -130,6 +132,9 @@ const Register = () => {
             <button type="submit" disabled={isLoading}>
               {isLoading ? "Registering..." : "Register"}
             </button>
+            {isLoading && (
+              <ConnectingWindow/>
+            )}
             {message && <p>{message}</p>}
           </form>
           <div id="recaptcha-container"></div>

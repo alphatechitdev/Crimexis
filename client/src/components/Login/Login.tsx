@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import './Login.css';
+import ConnectingWindow from '../LoadingWindows/ConnectingWindow';
 
 const Login = () => {
 
@@ -57,7 +58,7 @@ const Login = () => {
                 <button type="submit">{isLoading ? "Logging In" : "Login"}</button>
                 {message && <p>{message}</p>}
                 {isLoading && (
-                <div className='spinner'></div>
+                    <ConnectingWindow/>
                 )}
             </form>
                </div>

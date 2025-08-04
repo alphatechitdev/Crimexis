@@ -3,6 +3,7 @@ import axios from 'axios'
 import './Hotspots.css'
 import { useState } from 'react';
 import { HotspotsDataTypes } from '@/components/Types/hotspot.data.types';
+import ConnectingWindow from '@/components/LoadingWindows/ConnectingWindow';
 
 const Hotspots = () => {
 
@@ -133,7 +134,7 @@ const Hotspots = () => {
                 <strong>{hotspotMessage}</strong></div>
                 <br/>
                 {isLoading && (
-                    <div className='spinner'></div>
+                   <ConnectingWindow/>
                 )}
                 </div>
                 <div className='hotspots-location'>

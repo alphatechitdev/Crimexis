@@ -3,6 +3,7 @@
 import { ReactNode, useEffect } from "react";
 import { useAuth } from "../Context/Auth.Context";
 import { useRouter } from "next/navigation";
+import AuthLoadWindow from "../LoadingWindows/AuthLoadWindow";
 
 
 
@@ -18,6 +19,10 @@ const ProtectedRoute = ({children}:{children:ReactNode}) => {
         }
         console.log(isAuthenticated)
     }, [isAuthenticated, router]);
+
+    if (isAuthenticated == null) {
+        return <AuthLoadWindow/>
+    }
 
     
     return (

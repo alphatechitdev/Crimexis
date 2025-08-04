@@ -24,8 +24,27 @@
   color: #e0e0e0;
 }
 
+.footer-contact{
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.footer-contact a {
+  display: block;
+  color: #e0e0e0;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.footer-contact a:hover {
+  color: orange;
+  text-decoration: underline;
+}
+
 .footer-links,
-.footer-contact,
 .footer-social {
   min-width: 200px;
 }

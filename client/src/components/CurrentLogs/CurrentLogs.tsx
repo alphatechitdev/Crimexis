@@ -15,11 +15,20 @@ const CurrentLogs = () => {
 
     const fetchHotspots = async () => {
         try {
+            setIsLoading(true);
+            setMessage("Getting Latest Data...")
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/hotspots/fetchHotspots`);
+            const responseData = response.data;
+            setHotspots(responseData.hotspots);
+            setMessage("")
 
         } catch (error) {
-
+            console.error("Error While Fetching Hotspots, ", error);
+            setMessage("Failed To Get Hotspots. Try Again.");
+            setIsLoading(false);
         } finally {
-            
+            setIsLoading(false);
+
         }
 
     }
@@ -33,8 +42,11 @@ const CurrentLogs = () => {
     return (
         <div className="current-logs">
             <h1>Latest Hotspots</h1>
+            <strong>{message}</strong>
             <div className="hotspots">
-                
+                {isLoading && (
+                    <div className="spinner"></div>
+                )}
                 {hotspots && (
                     hotspots.map((hotspot, index) => (
                         <div key={index} className="hotspot-box">
