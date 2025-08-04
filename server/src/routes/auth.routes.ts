@@ -8,6 +8,7 @@ const AuthEndpoint = express.Router();
 AuthEndpoint.get('/logout', async (req, res) => {
   try {
     res.clearCookie('CrimexisSessionToken', {
+      domain:'crimexis.vercel.app',
       httpOnly: true,
       secure: true,
       sameSite: 'none',
@@ -32,6 +33,7 @@ AuthEndpoint.post('/login', customLimiter, async (req, res) => {
         } else {
             const token = generateToken({userId:creds.userId});
             res.cookie('CrimexisSessionToken', token, {
+                domain:'crimexis.vercel.app',
                 sameSite:'none',
                 httpOnly:true,
                 secure:true,
@@ -55,6 +57,7 @@ AuthEndpoint.post('/registerAdmin', async (req, res) => {
         if(result.success) {
             const token = generateToken({userId:result.adminUserID});
             res.cookie('CrimexisSessionToken', token, {
+                domain:'crimexis.vercel.app',
                 sameSite:'none',
                 httpOnly:true,
                 secure:true,
