@@ -17,7 +17,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins = ['http://localhost:3000', 'https://crimexis.vercel.app'],
+    allow_origins = ['http://localhost:3000', 'https://crimexis.vercel.app', 'https://crimexis.alphatechit.dev'],
     allow_credentials = True,
     allow_methods = ['*'],
     allow_headers = ['*']
