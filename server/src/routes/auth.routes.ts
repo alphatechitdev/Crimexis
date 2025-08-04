@@ -8,10 +8,9 @@ const AuthEndpoint = express.Router();
 AuthEndpoint.get('/logout', async (req, res) => {
   try {
     res.clearCookie('CrimexisSessionToken', {
-      domain:'crimexis.onrender.com',
       httpOnly: true,
       secure: true,
-      sameSite: 'none',
+      sameSite: 'strict',
       path: '/'
     });
     res.status(200).json({ success:true, message: 'Logged out' });
@@ -33,8 +32,7 @@ AuthEndpoint.post('/login', customLimiter, async (req, res) => {
         } else {
             const token = generateToken({userId:creds.userId});
             res.cookie('CrimexisSessionToken', token, {
-                domain:'crimexis.onrender.com',
-                sameSite:'none',
+                sameSite:'strict',
                 httpOnly:true,
                 secure:true,
                 maxAge:3600000
@@ -57,8 +55,7 @@ AuthEndpoint.post('/registerAdmin', async (req, res) => {
         if(result.success) {
             const token = generateToken({userId:result.adminUserID});
             res.cookie('CrimexisSessionToken', token, {
-                domain:'crimexis.onrender.com',
-                sameSite:'none',
+                sameSite:'strict',
                 httpOnly:true,
                 secure:true,
                 maxAge: 3600000
