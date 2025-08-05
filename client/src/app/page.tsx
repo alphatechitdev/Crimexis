@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         url: "https://crimexis.alphatechit.dev/CrimexisPic.png", // Add this image to your public folder
         width: 1200,
         height: 630,
-        alt: "Crimexis Hotspots Results Pic By AlphaTech",
+        alt: "Crimexis Hotspots Results/Dashboard Pic By AlphaTech",
       },
     ],
     locale: "en_US",

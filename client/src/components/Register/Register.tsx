@@ -141,6 +141,7 @@ const Register = () => {
         </div>
       ) : (
         <div>
+          <strong>If You Don't Recieve Any OPT/Code Try Entering: 0000</strong>
           <form onSubmit={verifyOTP}>
             <label>Enter OTP:</label>
             <input
