@@ -21,6 +21,14 @@ class BruteForceLogController {
             console.error("Error While Inserting Brute Force Data in Database, ", error);
         }
     }
+
+    async getUserByIP(ip:string, attemptedUser:string) {
+        try {
+
+        } catch (error) {
+
+        }
+    }
 };
 
 
