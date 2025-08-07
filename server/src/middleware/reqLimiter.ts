@@ -1,7 +1,7 @@
 import rateLimiter from 'express-rate-limit';
 import BruteForceLogController from '../controllers/bruteForce.controller.ts';
 
-const customLimiter = rateLimiter({
+const customLimiterViaIP = rateLimiter({
     windowMs: 15 * 60 * 1000,
     max:4,
     handler: async (req, res, next) => {
@@ -14,7 +14,7 @@ const customLimiter = rateLimiter({
 
         const attempted_flaged = await BFLC.getUserByIP(ip, attemptedUser);
         if (!attempted_flaged) {
-            
+
         }
 
 
@@ -22,7 +22,7 @@ const customLimiter = rateLimiter({
     }
 });
 
-export default customLimiter;
+export default customLimiterViaIP;
 
 
 

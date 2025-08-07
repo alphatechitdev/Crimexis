@@ -31,7 +31,7 @@ const bruteForceProtector = async (req:Request, res:Response, next:NextFunction)
                     await BFLC.logBruteForce(ip, userId, now);
                 }
 
-                return res.status(429).json({message:"Too many login attempts. Try again later"});
+                res.status(429).json({message:"Too many login attempts. Try again later"});
             }
         } else {
             attemptData = {count:1, firstAttempt:now};

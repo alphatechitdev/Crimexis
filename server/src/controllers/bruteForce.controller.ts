@@ -26,7 +26,7 @@ class BruteForceLogController {
         try {
             const record = await BruteForceLog.find({ip:ip, attemptedUser:attemptedUser});
             if (record.length>0) {
-                return true;
+                return true;    
             } 
             return false;
         } catch (error) {

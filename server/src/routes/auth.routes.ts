@@ -1,7 +1,7 @@
 import express from 'express';
 import AuthController from '../controllers/auth.controller.ts';
 import { generateToken } from '../middleware/tokenWork.ts';
-import customLimiter from '../middleware/reqLimiter.ts';
+import bruteForceProtector from '../middleware/custReqLimiter.ts';
 const AuthEndpoint = express.Router();
 
 
@@ -22,7 +22,7 @@ AuthEndpoint.get('/logout', async (req, res) => {
 
 
 
-AuthEndpoint.post('/login', customLimiter, async (req, res) => {
+AuthEndpoint.post('/login', bruteForceProtector, async (req, res) => {
     try {
         const {creds} = req.body;
         const AC = new AuthController();
