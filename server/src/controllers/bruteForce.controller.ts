@@ -24,9 +24,14 @@ class BruteForceLogController {
 
     async getUserByIP(ip:string, attemptedUser:string) {
         try {
-
+            const record = await BruteForceLog.find({ip:ip, attemptedUser:attemptedUser});
+            if (record.length>0) {
+                return true;
+            } 
+            return false;
         } catch (error) {
-
+            console.error("Error While Searchinh Logs for Exact Record, ", error);
+            return false;
         }
     }
 };

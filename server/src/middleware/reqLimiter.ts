@@ -11,8 +11,12 @@ const customLimiter = rateLimiter({
         const attemptedUser = req.body?.creds.userId || "unknown";
 
         const BFLC = new BruteForceLogController();
-        const result = await BFLC.logBruteForce(ip, attemptedUser, now);
-        
+
+        const attempted_flaged = await BFLC.getUserByIP(ip, attemptedUser);
+        if (!attempted_flaged) {
+            
+        }
+
 
         res.status(429).json({message: "Too many Attempts For Login. Please Try Again Later!"})
     }
