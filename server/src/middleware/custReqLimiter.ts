@@ -1,17 +1,15 @@
 import {Request, Response, NextFunction} from 'express'
 import BruteForceLogController from '../controllers/bruteForce.controller.ts';
 
-
 const ATTEMPT_LIMIT = 4;
 const WINDOW_MS = 15*60*1000;
 
-const attemptCache = new Map<string, {count:number, firstAttempt:number}>();
-
+const attemptCache = new Map<string, {count:number, firstAttempt:number}>(); 
 
 const bruteForceProtector = async (req:Request, res:Response, next:NextFunction) => {
 
     const ip = req.ip;
-    const userId = req.body.creds.userId || "unkown";
+    const userId = req.body.creds.userId || "unknown";
     const key = `${req}-${userId}`;
     const now = Date.now();
 

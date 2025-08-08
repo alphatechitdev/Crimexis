@@ -1,5 +1,6 @@
 import express from 'express';
 import AccountController from '../controllers/account.controller.ts';
+import { verifyToken } from '../middleware/tokenWork.ts';
 const AccountEndpoint = express.Router();
 
 
@@ -14,5 +15,12 @@ AccountEndpoint.get('/fetchAccountData', async (req , res) => {
         res.status(500).json({message:"Internal Server Error"});
     }
 });
+
+AccountEndpoint.patch('/changePasswords', verifyToken, async (req , res) => {
+    try {
+        const newCreds = req.body.creds;
+        const AC = new AccountController();
+    }
+})
 
 export default AccountEndpoint;

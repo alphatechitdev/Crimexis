@@ -1,5 +1,7 @@
 import Admins from "../models/admins.model.ts";
 import User from "../models/user.model.ts";
+import { LoginCredsTypes } from "../Types/login.creds.types.ts";
+import hashPassword from "../utilities/hashing.ts";
 
 
 
@@ -20,6 +22,16 @@ class AccountController {
             return {accountDetails};
         } catch (error) {
             console.error("Error While Fetching Account Data, ", error);
+        }
+    }
+
+    async changePassword (newCreds:LoginCredsTypes) {
+        try {
+            const newHashedPassword = await hashPassword(newCreds.password);
+
+            const updated = await Admins.updateOne({adminUserId: newCreds.userId}, {
+                $set: {
+            })
         }
     }
 };
